@@ -45,6 +45,24 @@ class _PomodoroState extends State<Pomodoro> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 25.0),
+              child: Text(
+                "Pomodoro Clock",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 40.0
+                ),
+              ),
+            ),
+            Expanded(
+              child: CircularProgressIndicator(
+
+
+              )
+            )
+          ],
         )
       ),
     );
