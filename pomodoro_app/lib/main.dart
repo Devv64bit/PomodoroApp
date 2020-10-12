@@ -33,37 +33,21 @@ class _PomodoroState extends State<Pomodoro> {
         centerTitle: true,
         elevation: 0.0,
         leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu,
-          color: Colors.black,
-        )
+            onPressed: () {},
+            icon: Icon(
+              Icons.menu,
+              color: Colors.black,
+            )),
       ),
-      ),
-
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 25.0),
-              child: Text(
-                "Pomodoro Clock",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 40.0
-                ),
-              ),
-            ),
-            Expanded(
-              child: CircularProgressIndicator(
-
-
-              )
-            )
-          ],
-        )
+      body: Center(
+        child: new CircularPercentIndicator(
+          animation: true,
+          radius: 140.0,
+          lineWidth: 15.0,
+          percent: 0.8,
+          center: new Text("100%"),
+          progressColor: Colors.green,
+        ),
       ),
     );
   }
