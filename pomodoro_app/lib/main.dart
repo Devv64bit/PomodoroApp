@@ -41,12 +41,20 @@ class _PomodoroState extends State<Pomodoro> {
       ),
       body: Center(
         child: new CircularPercentIndicator(
+          percent: percent,
           animation: true,
-          radius: 140.0,
-          lineWidth: 15.0,
-          percent: 0.8,
-          center: new Text("100%"),
+          animateFromLastPercent: true,
+          radius: 250.0,
+          lineWidth: 20.0,
           progressColor: Colors.green,
+          center: Text(
+            "$timeinMinutes",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 80.0
+            ),
+          ),
+
         ),
       ),
     );
