@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:icofont_flutter/icofont_flutter.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,16 +13,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
+/*
+ Declare variables here
+*/
+
+double percent = 0;
+String time = '25.00';
+int timeinMinutes = 25;
+int timeinSec = timeinMinutes * 60;
+
 class Pomodoro extends StatefulWidget {
   @override
   _PomodoroState createState() => _PomodoroState();
 }
 
 class _PomodoroState extends State<Pomodoro> {
-  double percent = 0;
-  static int timeinMinutes = 25;
-  int timeinSec = timeinMinutes * 60;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,24 +44,38 @@ class _PomodoroState extends State<Pomodoro> {
               color: Colors.black,
             )),
       ),
-      body: Center(
-        child: new CircularPercentIndicator(
-          percent: percent,
-          animation: true,
-          animateFromLastPercent: true,
-          radius: 250.0,
-          lineWidth: 20.0,
-          progressColor: Colors.green,
-          center: Text(
-            "$timeinMinutes",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 80.0
-            ),
-          ),
-
-        ),
-      ),
+      body: _buildTomatoTimer(),
     );
   }
+}
+
+Widget _buildTomatoTimer() {
+  return Center(
+    child: Column(
+    children: <Widget>[
+      _timeShow(),
+      Expanded(
+        flex: 1,
+        child: Icon(
+          IcoFontIcons.tomato,
+          size: 200.00,
+        ),
+      ),
+    ]
+  )
+  );
+}
+
+Widget _timeShow()
+{
+  return Center(
+    child: Text(
+      "$time",
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 80.0
+      ),
+    ),
+  );
 }
