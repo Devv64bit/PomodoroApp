@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:icofont_flutter/icofont_flutter.dart';
 
 void main() => runApp(MyApp());
@@ -13,14 +16,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/*
- Declare variables here
-*/
-
 double percent = 0;
-String time = '25.00';
+String time = '25.00'; 
 int timeinMinutes = 25;
-int timeinSec = timeinMinutes * 60;
+int timeinSeconds = timeinMinutes * 60;
+var duration = const Duration(seconds: 1);
+var watch  = Stopwatch();
 
 class Pomodoro extends StatefulWidget {
   @override
@@ -42,8 +43,9 @@ class _PomodoroState extends State<Pomodoro> {
             icon: Icon(
               Icons.menu,
               color: Colors.black,
-            )),
-      ),
+            )
+          ),
+        ),
       body: _buildTomatoTimer(),
     );
   }
@@ -53,20 +55,32 @@ Widget _buildTomatoTimer() {
   return Center(
     child: Column(
     children: <Widget>[
-      _timeShow(),
+      _showTime(),
       Expanded(
         flex: 1,
         child: Icon(
           IcoFontIcons.tomato,
-          size: 200.00,
+          size: 210.00,
         ),
       ),
+      Row(children: <Widget>[
+        IconButton(
+          icon: Icon(Icons.refresh),
+          onPressed: _restart,
+          iconSize: 70,
+        ),
+        IconButton(
+          icon: _isPlaying() ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+          onPressed: _startStopWatch,
+          iconSize: 70,
+        ),
+      ])
     ]
   )
   );
 }
 
-Widget _timeShow()
+Widget _showTime()
 {
   return Center(
     child: Text(
@@ -78,4 +92,44 @@ Widget _timeShow()
       ),
     ),
   );
+}
+
+void _startStopWatch()
+{
+  if(_isPlaying())
+  {
+    watch.stop();
+  } 
+  else
+  {
+    watch.start();
+    _startTimer();
+  }
+}
+
+void _startTimer()
+{
+  Timer(duration, _keepTimerGoing);
+}
+
+bool _isPlaying()
+{
+  return watch.isRunning;
+}
+
+void _keepTimerGoing()
+{
+  if(watch.isRunning)
+  {
+    _startTimer();
+  }
+
+
+}
+
+void _restart()
+{
+  watch.stop();
+  watch.reset();
+  
 }
